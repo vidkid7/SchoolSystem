@@ -1,2 +1,2 @@
 <?php
-Route::get('/dashboard', 'DashboardController@index')->name('localBody.dashboard');
+// LocalBodyAdmin dashboard removed (controller deleted). /admin/dashboard is served by SchoolHead.

@@ -25,29 +25,25 @@ class RedirectIfAuthenticated
                 $role = Auth::user()->getRoleNames()[0];
                 // dd($role);
 
+                // Use direct URLs so redirect works even when route:cache is used (e.g. on Railway)
                 switch ($role) {
                     case 'Super Admin':
-                        return new RedirectResponse(route('admin.superAdmin.dashboard'));
+                        return new RedirectResponse(url('/admin/super-admin/dashboard'));
                     case 'District Admin':
                         return new RedirectResponse(url('/admin/district/dashboard'));
                     case 'Municipality Admin':
-                        return new RedirectResponse(route('admin.municipality.dashboard'));
+                        return new RedirectResponse(url('/admin/municipality/dashboard'));
                     case 'Head School':
-                        return new RedirectResponse(route('admin.headSchool.dashboard'));
+                        return new RedirectResponse(url('/admin/head-school/dashboard'));
                     case 'School Admin':
-                        return new RedirectResponse(route('admin.schoolAdmin.dashboard'));
+                        return new RedirectResponse(url('/admin/school-admin/dashboard'));
                     case 'Teacher':
-                        return new RedirectResponse(route('admin.teacher.dashboard'));
                     case 'Accountant':
-                        return new RedirectResponse(route('admin.accountant.dashboard'));
                     case 'Librarian':
-                        return new RedirectResponse(route('admin.librarian.dashboard'));
                     case 'Principal':
-                        return new RedirectResponse(route('admin.principal.dashboard'));
                     case 'Receptionist':
-                        return new RedirectResponse(route('admin.receptionist.dashboard'));
                     case 'Student':
-                        return new RedirectResponse(route('admin.student.dashboard'));
+                        return new RedirectResponse(url('/admin'));
                     default:
                         return redirect(RouteServiceProvider::HOME);
                 }

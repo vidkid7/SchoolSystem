@@ -1,2 +1,5 @@
 <?php
-Route::get('/super-admin/dashboard', 'DashboardController@index')->name('superAdmin.dashboard');
+
+use App\Http\Controllers\SuperAdmin\DashboardController;
+
+Route::get('/super-admin/dashboard', [DashboardController::class, 'index'])->name('superAdmin.dashboard');

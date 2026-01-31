@@ -1,2 +1,5 @@
 <?php
-Route::get('/school-admin/dashboard', 'DashboardController@index')->name('schoolAdmin.dashboard');
+
+use App\Http\Controllers\SchoolAdmin\DashboardController;
+
+Route::get('/school-admin/dashboard', [DashboardController::class, 'index'])->name('schoolAdmin.dashboard');

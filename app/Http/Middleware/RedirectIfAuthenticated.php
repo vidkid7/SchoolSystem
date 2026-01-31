@@ -29,7 +29,7 @@ class RedirectIfAuthenticated
                     case 'Super Admin':
                         return new RedirectResponse(route('admin.superAdmin.dashboard'));
                     case 'District Admin':
-                        return new RedirectResponse(url('/admin/district/dashboard'));
+                        return new RedirectResponse(route('admin.district.dashboard'));
                     case 'Municipality Admin':
                         return new RedirectResponse(route('admin.municipality.dashboard'));
                     case 'Head School':

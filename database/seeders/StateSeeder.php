@@ -52,6 +52,6 @@ class StateSeeder extends Seeder
           
         ];
 
-        DB::table('states')->insert($data);
+        DB::table('states')->upsert($data, ['id'], ['name', 'name_np']);
     }
 }

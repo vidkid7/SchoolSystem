@@ -3,9 +3,12 @@
 # Make executable: chmod +x railway/init-app.sh
 set -e
 
+# Clear any stale cache first so config is built from current env
+php artisan optimize:clear
+
 php artisan migrate --force
 php artisan storage:link 2>/dev/null || true
-php artisan optimize:clear
+
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache

@@ -6794,6 +6794,6 @@ class MunicipalitySeeder extends Seeder
           
         ];
 
-        DB::table('municipalities')->insert($data);
+        DB::table('municipalities')->upsert($data, ['id'], ['district_id', 'name', 'name_np', 'wards']);
     }
 }

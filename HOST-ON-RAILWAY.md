@@ -86,12 +86,15 @@ SESSION_DRIVER=cookie
 CACHE_DRIVER=file
 QUEUE_CONNECTION=sync
 FILESYSTEM_DISK=local
+
+# Required so nginx uses public/ as web root (fixes CSS/JS not loading)
+NIXPACKS_PHP_ROOT_DIR=/app/public
 ```
 
 Replace:
 
 - `PASTE_YOUR_APP_KEY_FROM_STEP_1` → the full `base64:...` value from Step 1.
-- `PASTE_YOUR_RAILWAY_URL_FROM_STEP_5` → the URL from Step 5 (e.g. `https://schoolsystem-production-xxxx.up.railway.app`).
+- `PASTE_YOUR_RAILWAY_URL_FROM_STEP_5` → the **exact** URL from Step 5, including `https://` (e.g. `https://schoolsystem-production-xxxx.up.railway.app`). This is required for CSS/JS and links to load correctly.
 - If your database service is **not** named `Postgres`, change `Postgres` in `${{Postgres.DATABASE_URL}}` to your database service name.
 
 5. **If the build fails with “ext-zip” or “ext-gd” missing:** add this variable so the builder installs PHP extensions:
@@ -166,7 +169,11 @@ After this, default logins (e.g. `superadmin` / `password`) from `database/seede
 
 ## If something goes wrong
 
-- **500 error**: Check that `APP_KEY` and `APP_URL` are set correctly and that you redeployed after changing variables.
+- **500 Internal Server Error**
+  1. **See the real error**: In your app service **Variables**, set `APP_DEBUG=true` (and optionally `LOG_LEVEL=debug`). Redeploy, then open your app URL again—Laravel will show the exception and message. **Set `APP_DEBUG=false` again after debugging.**
+  2. **Check variables**: Ensure `APP_KEY` is set (from Step 1, e.g. `base64:...`) and `APP_URL` matches your Railway domain (e.g. `https://yourservice.up.railway.app`). Redeploy after changing variables.
+  3. **Check logs**: In the app service, open **Deployments** → click the latest deployment → **View Logs**. Look for PHP/Laravel errors (e.g. "No application encryption key", database connection errors).
+  4. **Clear config cache**: If you changed env vars but still get 500, redeploy so the Pre-Deploy script runs again (it runs `optimize:clear` then `config:cache` from current env).
 - **Database error**: Ensure `DATABASE_URL=${{Postgres.DATABASE_URL}}` and the Postgres service name matches.
 - **Blank or broken page**: Make sure **Custom Build Command** is `npm run build` and the last deploy succeeded.
 - **Logs**: In the app service, open **Deployments** → click a deployment → **View Logs**.

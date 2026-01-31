@@ -479,6 +479,6 @@ class DistrictSeeder extends Seeder
       
         ];
 
-        DB::table('districts')->insert($data);
+        DB::table('districts')->upsert($data, ['id'], ['province_id', 'name', 'name_np']);
     }
 }

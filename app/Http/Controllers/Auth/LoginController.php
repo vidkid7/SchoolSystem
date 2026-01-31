@@ -36,7 +36,7 @@ class LoginController extends Controller
             case 'Super Admin':
                 return route('admin.superAdmin.dashboard');
             case 'District Admin':
-                return route('admin.district.dashboard');
+                return url('/admin/district/dashboard');
             case 'Municipality Admin':
                 return route('admin.municipality.dashboard');
             case 'Head School':

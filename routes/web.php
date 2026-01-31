@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 
 Route::get('change-password', [ChangePasswordController::class, 'showChangePasswordForm'])->name('password.change');
-Route::post('change-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
+Route::post('change-password', [ChangePasswordController::class, 'changePassword'])->name('password.change.update');
 
 
 

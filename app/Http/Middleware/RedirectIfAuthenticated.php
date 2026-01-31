@@ -22,8 +22,11 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                $role = Auth::user()->getRoleNames()[0];
-                // dd($role);
+                $roles = Auth::user()->getRoleNames();
+                $role = $roles->isNotEmpty() ? $roles[0] : null;
+                if ($role === null) {
+                    return redirect(RouteServiceProvider::HOME);
+                }
 
                 // Use direct URLs so redirect works even when route:cache is used (e.g. on Railway)
                 switch ($role) {

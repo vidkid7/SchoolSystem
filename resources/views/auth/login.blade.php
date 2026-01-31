@@ -109,7 +109,7 @@
                                                         <h3>{{ __('Account Login') }}</h3>
                                                     </div>
                                                 </div>
-                                                <form method="POST" action="{{ route('login') }}">
+                                                <form method="POST" action="{{ url('/login') }}">
                                                     @csrf
                                                     <div class="mb-3">
                                                         <label class="form-label" for="card-email">{{ __('Email Address') }}</label>

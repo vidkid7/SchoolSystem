@@ -22,31 +22,32 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                $roles = Auth::user()->getRoleNames();
-                $role = $roles->isNotEmpty() ? $roles[0] : null;
-                if ($role === null) {
-                    return redirect(RouteServiceProvider::HOME);
-                }
+                $role = Auth::user()->getRoleNames()[0];
+                // dd($role);
 
-                // Use direct URLs so redirect works even when route:cache is used (e.g. on Railway)
                 switch ($role) {
                     case 'Super Admin':
-                        return new RedirectResponse(url('/admin/super-admin/dashboard'));
+                        return new RedirectResponse(route('admin.superAdmin.dashboard'));
                     case 'District Admin':
                         return new RedirectResponse(url('/admin/district/dashboard'));
                     case 'Municipality Admin':
-                        return new RedirectResponse(url('/admin/municipality/dashboard'));
+                        return new RedirectResponse(route('admin.municipality.dashboard'));
                     case 'Head School':
-                        return new RedirectResponse(url('/admin/head-school/dashboard'));
+                        return new RedirectResponse(route('admin.headSchool.dashboard'));
                     case 'School Admin':
-                        return new RedirectResponse(url('/admin/school-admin/dashboard'));
+                        return new RedirectResponse(route('admin.schoolAdmin.dashboard'));
                     case 'Teacher':
+                        return new RedirectResponse(route('admin.teacher.dashboard'));
                     case 'Accountant':
+                        return new RedirectResponse(route('admin.accountant.dashboard'));
                     case 'Librarian':
+                        return new RedirectResponse(route('admin.librarian.dashboard'));
                     case 'Principal':
+                        return new RedirectResponse(route('admin.principal.dashboard'));
                     case 'Receptionist':
+                        return new RedirectResponse(route('admin.receptionist.dashboard'));
                     case 'Student':
-                        return new RedirectResponse(url('/admin'));
+                        return new RedirectResponse(route('admin.student.dashboard'));
                     default:
                         return redirect(RouteServiceProvider::HOME);
                 }

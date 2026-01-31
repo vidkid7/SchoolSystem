@@ -32,27 +32,33 @@ class LoginController extends Controller
     public function redirectTo()
     {
         $role = Auth::user()->getRoleNames()[0];
-        // Use direct URLs so redirect works even when route:cache is used (e.g. on Railway)
         switch ($role) {
             case 'Super Admin':
-                return url('/admin/super-admin/dashboard');
+                return route('admin.superAdmin.dashboard');
             case 'District Admin':
                 return url('/admin/district/dashboard');
             case 'Municipality Admin':
-                return url('/admin/municipality/dashboard');
+                return route('admin.municipality.dashboard');
             case 'Head School':
-                return url('/admin/head-school/dashboard');
+                return route('admin.headSchool.dashboard');
             case 'School Admin':
-                return url('/admin/school-admin/dashboard');
+                return route('admin.schoolAdmin.dashboard');
             case 'Teacher':
+                return route('admin.teacher.dashboard');
             case 'Accountant':
+                return route('admin.accountant.dashboard');
             case 'Librarian':
+                return route('admin.librarian.dashboard');
             case 'Principal':
+                return route('admin.principal.dashboard');
             case 'Receptionist':
+                return route('admin.receptionist.dashboard');
             case 'Student':
-                return url('/admin');
+                return route('admin.student.dashboard');
+
             default:
-                return url('/admin');
+                return '/home';
+                break;
         }
     }
 

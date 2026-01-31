@@ -12,7 +12,7 @@ use App\Http\Controllers\Auth\ChangePasswordController;
 Auth::routes();
 
 Route::get('/', function () {
-    return redirect(url('/login'));
+    return redirect()->route('login');
 });
 
 // routes/web.php

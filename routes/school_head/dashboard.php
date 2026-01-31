@@ -1,5 +1,2 @@
 <?php
-
-use App\Http\Controllers\SchoolHead\DashboardController;
-
-Route::get('/head-school/dashboard', [DashboardController::class, 'index'])->name('headSchool.dashboard');
+Route::get('/dashboard', 'DashboardController@index')->name('headSchool.dashboard');
